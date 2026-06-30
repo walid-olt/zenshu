@@ -1,15 +1,20 @@
-import type { Anime } from "@tutkli/jikan-ts";
-import { BookmarkIcon } from "@phosphor-icons/react";
+import { BookmarkIcon, ArrowSquareUpRightIcon } from "@phosphor-icons/react";
 
 import { formatTrailerUrl } from "@/lib/utils/url";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef } from "react";
+import jikan from "@/lib/api-client/jikan";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
-type Props = {
-  anime: Anime;
-};
-
-export default function TrailerCover({ anime }: Props) {
+export default function Hero() {
+  const {
+    data: { data },
+  } = useSuspenseQuery({
+    queryKey: ["anime", "cover"],
+    queryFn: () => jikan.anime.getAnimeSearch({ q: "chainsaw man", limit: 1 }),
+    staleTime: 1000 * 60 * 60,
+  });
+  const anime = data[0];
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   const url = formatTrailerUrl(anime.trailer);
@@ -36,7 +41,7 @@ export default function TrailerCover({ anime }: Props) {
         </p>
         <div className="flex gap-3">
           <Button variant="default" size="lg">
-            View Details
+            View Details <ArrowSquareUpRightIcon size={16} weight="bold" />
           </Button>
           <Button variant="secondary" size="lg">
             <BookmarkIcon size={16} weight="regular" />
