@@ -1,6 +1,6 @@
 import type { Anime } from "@tutkli/jikan-ts";
-export function formatTrailerUrl(trailer: Anime["trailer"] ): string | null {
-  if (!trailer.embed_url || !trailer.youtube_id) return null;
+export function formatTrailerUrl(trailer: Anime["trailer"]): string | null {
+  if (!trailer.embed_url) return null;
 
   // Extract video ID from either format:
   // https://www.youtube-nocookie.com/embed/jk7QSGwupPA?...
@@ -12,14 +12,14 @@ export function formatTrailerUrl(trailer: Anime["trailer"] ): string | null {
 
   // Rebuild params
   const params = new URLSearchParams({
-    enablejsapi: '1',
-    wmode: 'opaque',
-    autoplay: '1',
-    mute: '1',
-    controls: '0',
-    loop: '1',
-    modestbranding: '1',
-    playlist: videoId, 
+    enablejsapi: "1",
+    wmode: "opaque",
+    autoplay: "1",
+    mute: "1",
+    controls: "0",
+    loop: "1",
+    modestbranding: "1",
+    playlist: videoId,
   });
 
   return `https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`;

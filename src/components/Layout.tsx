@@ -20,7 +20,6 @@ function Layout() {
           zIndex: 9999,
         }}
       />
-      <hr hidden={isLoading} className="h-[3px]" />
       <Outlet />
     </main>
   );

@@ -1,6 +1,8 @@
 import GlobalError from "@/components/GlobalError";
 import GlobalLoading from "@/components/GlobalLoading";
 import Layout from "@/components/Layout";
+import jikan from "@/lib/api-client/jikan";
+import { JikanClient } from "@tutkli/jikan-ts";
 import type { RouteObject } from "react-router";
 
 const routes: RouteObject[] = [
