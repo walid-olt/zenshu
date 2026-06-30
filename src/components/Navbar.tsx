@@ -6,7 +6,7 @@ import Logo from "./Logo";
 
 export default function Navbar() {
   return (
-    <nav className="px-8 py-2 flex items-center justify-between  shadow-[0_1px_0_0_var(--muted)] ">
+    <nav className="px-8 py-2 flex items-center justify-between sticky top-0 z-9999 bg-background/20 backdrop-blur-2xl  shadow-[0_1px_0_0_var(--muted)] ">
       <div>
         <NavLink className={"outline-none"} to={"/"}>
           <Logo />

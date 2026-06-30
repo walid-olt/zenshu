@@ -42,7 +42,7 @@ export function AnimeCardCompact({ anime, index }: Props) {
                   <StarIcon
                     size={12}
                     weight="fill"
-                    className="text-yellow-500"
+                    className="text-chart-1"
                   />
                   {score}
                 </span>
