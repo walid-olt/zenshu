@@ -27,11 +27,7 @@ export default function Error({
     description || "An unexpected error occurred. Please try again.";
   console.error(error);
   return (
-    <Alert
-      variant="destructive"
-      role="alert"
-      className="my-8 mx-auto max-w-2/4"
-    >
+    <Alert variant="destructive" role="alert" className="my-8 mx-auto h-max">
       <AlertTitle className="flex items-center gap-2">
         {icon || <Icon className="size-5" />}
         <span>{title}</span>

@@ -16,6 +16,7 @@ function FeaturedCollectionCard({ heading, fetcher }: Props) {
   } = useSuspenseQuery({
     queryKey: ["featured-collection", heading],
     queryFn: fetcher,
+    staleTime: Infinity,
   });
 
   const posters = data.slice(0, 3);
