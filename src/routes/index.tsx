@@ -1,8 +1,7 @@
 import GlobalError from "@/components/GlobalError";
 import GlobalLoading from "@/components/GlobalLoading";
 import Layout from "@/components/Layout";
-import jikan from "@/lib/api-client/jikan";
-import { JikanClient } from "@tutkli/jikan-ts";
+import HomePage from "@/features/homepage/pages/HomePage";
 import type { RouteObject } from "react-router";
 
 const routes: RouteObject[] = [
@@ -15,7 +14,7 @@ const routes: RouteObject[] = [
         path: "/",
         index: true,
         hydrateFallbackElement: <GlobalLoading />,
-        lazy: () => import("@/features/homepage/pages/HomePage"),
+        element: <HomePage />,
       },
       {
         path: "/catalog",

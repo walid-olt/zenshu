@@ -1,10 +1,34 @@
 import { NavLink } from "react-router";
 import { Button } from "./ui/button";
-import { BooksIcon } from "@phosphor-icons/react";
+import { BooksIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") {
+      return "light";
+    }
+
+    const storedTheme = window.localStorage.getItem("theme");
+    if (storedTheme === "light" || storedTheme === "dark") {
+      return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () =>
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+
   return (
     <nav className="px-8 py-2 flex items-center justify-between sticky top-0 z-9999 bg-background/20 backdrop-blur-2xl  shadow-[0_1px_0_0_var(--muted)] ">
       <div>
@@ -51,6 +75,18 @@ export default function Navbar() {
             <BooksIcon size={16} weight="regular" />
             My Library
           </NavLink>
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+        >
+          {theme === "dark" ? (
+            <SunIcon size={16} weight="regular" />
+          ) : (
+            <MoonIcon size={16} weight="regular" />
+          )}
         </Button>
       </div>
     </nav>
