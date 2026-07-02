@@ -2,12 +2,29 @@ import QueryContainer from "@/components/QueryContainer";
 import jikan from "@/lib/api-client/jikan";
 import { getSeason } from "@/lib/utils";
 import FeaturedCollectionCard from "./FeaturedCollectionCard";
+import Error from "@/components/Error";
+import { SectionBlockSkeleton } from "@/components/LoadingSkeletons";
 
 export default function FeaturedCollection() {
   // TODO: add links to each collection to redirect to the catalog
   return (
     <div className="grid gap-6 px-8 py-12 md:grid-cols-3">
-      <QueryContainer>
+      <QueryContainer
+        loadingFallback={
+          <>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <SectionBlockSkeleton key={index} variant="collection" />
+            ))}
+          </>
+        }
+        errorFallback={(props) => (
+          <Error
+            description=""
+            {...props}
+            title="Failed to load collection data"
+          />
+        )}
+      >
         <FeaturedCollectionCard
           heading="The Best Mystical Anime"
           fetcher={() =>
@@ -20,8 +37,6 @@ export default function FeaturedCollection() {
             })
           }
         />
-      </QueryContainer>
-      <QueryContainer>
         <FeaturedCollectionCard
           heading={`Top 20 Romance Anime `}
           fetcher={() =>
@@ -33,8 +48,6 @@ export default function FeaturedCollection() {
             })
           }
         />
-      </QueryContainer>
-      <QueryContainer>
         <FeaturedCollectionCard
           heading={`This ${getSeason(new Date())} Collection`}
           fetcher={() => jikan.seasons.getSeasonNow({ limit: 3 })}

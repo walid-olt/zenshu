@@ -30,13 +30,13 @@ export default function Navbar() {
     setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
 
   return (
-    <nav className="px-8 py-2 flex items-center justify-between sticky top-0 z-9999 bg-background/20 backdrop-blur-2xl  shadow-[0_1px_0_0_var(--muted)] ">
+    <nav className="sticky top-0 z-50 flex items-center justify-between bg-background/85 px-8 py-2 shadow-[0_1px_0_0_var(--muted)] backdrop-blur-2xl">
       <div>
         <NavLink className={"outline-none"} to={"/"}>
           <Logo />
         </NavLink>
       </div>
-      <div className="flex items-center gap-6 *:hover:bg-popover *:   *:px-2.5   *:py-1 *:rounded-(--radius)">
+      <div className="flex items-center gap-6 *:rounded-(--radius) *:px-2.5 *:py-1 *:hover:bg-popover">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -59,17 +59,9 @@ export default function Navbar() {
         >
           Catalog
         </NavLink>
-        <NavLink
-          to="/characters"
-          className={({ isActive }) =>
-            cn(
-              "text-sm transition-colors",
-              isActive && "text-primary font-semibold",
-            )
-          }
-        >
+        <Button disabled title="comming soon" variant={"link"}>
           Characters
-        </NavLink>
+        </Button>
         <Button variant="outline" size="sm" asChild>
           <NavLink to="/library">
             <BooksIcon size={16} weight="regular" />

@@ -12,6 +12,8 @@ type QueryContainerProps = {
   loadingFallback?: ReactNode;
   /** Optional custom error fallback component */
   errorFallback?: ComponentType<FallbackProps>;
+  /** Optional error message*/
+  errorMessage?: string;
 };
 
 /*

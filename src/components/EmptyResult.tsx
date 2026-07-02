@@ -1,4 +1,4 @@
-import { CircleOff as EmptyIcon } from "lucide-react";
+import { EmptyIcon } from "@phosphor-icons/react";
 
 import {
   Empty,
@@ -28,7 +28,7 @@ export default function EmptyResult({
     <Empty className={cn(className)}>
       <EmptyHeader>
         <EmptyMedia>
-          {icon || <EmptyIcon className="size-full bg-transparent" />}
+          {icon || <EmptyIcon size={32} className="size-full bg-transparent" />}
         </EmptyMedia>
         <EmptyTitle className="text-2xl">{title}</EmptyTitle>
         {description && <EmptyDescription>{description}</EmptyDescription>}
