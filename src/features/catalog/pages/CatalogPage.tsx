@@ -12,7 +12,7 @@ export function Component() {
         <aside className="col-span-1 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-2">
           <Filters />
         </aside>
-        <div className="col-span-3 h-[calc(100vh-7rem)] overflow-y-auto rounded-md p-4">
+        <div className="col-span-3 h-[calc(100vh-7rem)] overflow-y-auto rounded-md py-4">
           <ErrorBoundary
             fallback={
               <Error
