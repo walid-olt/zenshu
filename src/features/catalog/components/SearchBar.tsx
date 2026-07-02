@@ -1,4 +1,7 @@
-import { MagnifyingGlassIcon as Search } from "@phosphor-icons/react";
+import {
+  MagnifyingGlassIcon as Search,
+  XIcon as Reset,
+} from "@phosphor-icons/react";
 
 import {
   InputGroup,
@@ -6,6 +9,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import useSafeParams from "../hooks/useSafeParams";
+import { Button } from "@/components/ui/button";
 
 export default function SearchBar() {
   const [params, setParams] = useSafeParams();
@@ -13,7 +17,7 @@ export default function SearchBar() {
   return (
     <InputGroup className="max-w-full">
       <InputGroupInput
-        value={q}
+        value={q ?? ""}
         onChange={({ target: { value } }) => {
           setParams({ q: value });
         }}
@@ -22,6 +26,17 @@ export default function SearchBar() {
       <InputGroupAddon>
         <Search />
       </InputGroupAddon>
+      {q && (
+        <InputGroupAddon align={"inline-end"}>
+          <Button
+            variant={"ghost"}
+            size={"icon-xs"}
+            onClick={() => setParams({ q: "" })}
+          >
+            <Reset />
+          </Button>
+        </InputGroupAddon>
+      )}
     </InputGroup>
   );
 }

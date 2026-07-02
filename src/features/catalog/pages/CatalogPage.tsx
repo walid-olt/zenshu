@@ -1,6 +1,8 @@
+import Error from "@/components/Error";
 import Catalog from "../components/Catalog";
 import CatalogHeader from "../components/CatalogHeader";
 import { Filters } from "../components/Filters";
+import { ErrorBoundary } from "react-error-boundary";
 
 export function Component() {
   return (
@@ -11,7 +13,19 @@ export function Component() {
           <Filters />
         </aside>
         <div className="col-span-3 h-[calc(100vh-7rem)] overflow-y-auto rounded-md p-4">
-          <Catalog />
+          <ErrorBoundary
+            fallback={
+              <Error
+                resetErrorBoundary={() => {
+                  window.location.search = "";
+                }}
+                title="Couldn't get anime data"
+                description="Something went wrong while fetching data, check your connection and try again "
+              />
+            }
+          >
+            <Catalog />
+          </ErrorBoundary>
         </div>
       </div>
     </section>

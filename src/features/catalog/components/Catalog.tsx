@@ -4,9 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import jikan from "@/lib/api-client/jikan";
 import { AnimeCard } from "@/components/AnimeCard";
 import { AnimeCardSkeleton } from "@/components/LoadingSkeletons";
+import EmptyResult from "@/components/EmptyResult";
+import { Button } from "@/components/ui/button";
 
 function Catalog() {
-  const [params] = useSafeParams();
+  const [params, setParams, resetParams] = useSafeParams();
 
   const debouncedParams = useDebounce(params, 1000);
   //TODO: handle errors
@@ -15,6 +17,9 @@ function Catalog() {
     queryFn: () =>
       jikan.anime.getAnimeSearch({ ...debouncedParams, limit: 24, sfw: true }),
   });
+
+  // let the error boundary handle the fallback
+  if (error) throw new Error();
 
   if (isFetching) {
     return (
@@ -29,6 +34,19 @@ function Catalog() {
   }
   const anime = data?.data;
   if (anime) {
+    if (anime.length === 0) {
+      return (
+        <EmptyResult
+          title="Couldn't find anything that matches your search"
+          description="try adjusting your search"
+        >
+          <Button variant={"outline"} onClick={resetParams}>
+            Reset filters
+          </Button>
+        </EmptyResult>
+      );
+    }
+
     return (
       <div className="grid grid-cols-3 gap-2 w-full overflow-x-clip md:grid-cols-6">
         {anime.map((anime) => (

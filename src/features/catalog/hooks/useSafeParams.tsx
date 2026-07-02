@@ -32,5 +32,10 @@ export default function useSafeParams() {
     [params, setSearchParams],
   );
 
-  return [params, setParams] as const;
+  // New function to clear all search parameters
+  const resetParams = useCallback(() => {
+    setSearchParams({}, { replace: true });
+  }, [setSearchParams]);
+
+  return [params, setParams, resetParams] as const;
 }
