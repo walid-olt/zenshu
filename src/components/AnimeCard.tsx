@@ -8,7 +8,42 @@ type Props = {
   index: number;
 };
 
-export function AnimeCardCompact({ anime, index }: Props) {
+export function AnimeCard({ anime }: Omit<Props, "index">) {
+  const { title, score, genres, images, mal_id } = anime;
+  const genre = genres?.[0]?.name;
+  const imageUrl = images?.webp?.image_url ?? images?.jpg?.image_url;
+
+  return (
+    <div>
+      <Link to={`/anime/${mal_id}`} className="block group">
+        <div className="rounded-lg overflow-hidden bg-card border border-border">
+          <div className="aspect-3/4 overflow-hidden">
+            <img
+              src={imageUrl}
+              alt={title}
+              className="w-full h-full object-cover "
+            />
+          </div>
+          <div className="p-2.5">
+            <h3 className="text-sm font-semibold truncate">{title}</h3>
+            <div className="flex items-center justify-between mt-1.5">
+              <span className="text-xs text-muted-foreground truncate max-w-[80%]">
+                {genre ?? "unknown"}
+              </span>
+              {score != null && (
+                <span className="flex items-center gap-0.5 text-xs font-medium shrink-0">
+                  <StarIcon size={12} weight="fill" className="text-chart-1" />
+                  {score}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
+}
+export function AnimeCardAnimated({ anime, index }: Props) {
   const { title, score, genres, images, mal_id } = anime;
   const genre = genres?.[0]?.name;
   const imageUrl = images?.webp?.image_url ?? images?.jpg?.image_url;
@@ -39,11 +74,7 @@ export function AnimeCardCompact({ anime, index }: Props) {
               )}
               {score != null && (
                 <span className="flex items-center gap-0.5 text-xs font-medium shrink-0">
-                  <StarIcon
-                    size={12}
-                    weight="fill"
-                    className="text-chart-1"
-                  />
+                  <StarIcon size={12} weight="fill" className="text-chart-1" />
                   {score}
                 </span>
               )}

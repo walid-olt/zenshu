@@ -27,7 +27,7 @@ export default function useSafeParams() {
         ...partialQuery,
       };
 
-      setSearchParams(toAnimeSearchParams(mergedQuery));
+      setSearchParams(toAnimeSearchParams(mergedQuery), { replace: true });
     },
     [params, setSearchParams],
   );

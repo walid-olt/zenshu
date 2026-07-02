@@ -1,11 +1,11 @@
 import { Input } from "@/components/ui/input";
 import useSafeParams from "../hooks/useSafeParams";
 
-function RangeFilter() {
+function YearRangeFilter() {
   const [params, setParams] = useSafeParams();
   const { end_date, start_date } = params;
   return (
-    <div className="flex items-center">
+    <div className="flex items-center ">
       <Input
         min={1963}
         max={2026}
@@ -35,4 +35,4 @@ function RangeFilter() {
   );
 }
 
-export default RangeFilter;
+export default YearRangeFilter;

@@ -1,40 +1,22 @@
 import type { AnimeSearchParams } from "@tutkli/jikan-ts";
 import { z } from "zod";
+import {
+  ANIME_ORDER_BY,
+  ANIME_RATING,
+  ANIME_SORT_TYPE,
+  ANIME_STATUS,
+  ANIME_TYPES,
+} from "@/lib/constants/";
 
-const animeSearchTypeSchema = z.enum([
-  "tv",
-  "movie",
-  "ova",
-  "special",
-  "ona",
-  "music",
-  "cm",
-  "pv",
-  "tv_special",
-]);
+const animeSearchTypeSchema = z.enum(ANIME_TYPES);
 
-const animeSearchStatusSchema = z.enum(["airing", "complete", "upcoming"]);
+const animeSearchStatusSchema = z.enum(ANIME_STATUS);
 
-const animeRatingSchema = z.enum(["g", "pg", "pg13", "r17", "r", "rx"]);
+const animeRatingSchema = z.enum(ANIME_RATING);
 
-const animeSearchOrderSchema = z.enum([
-  "type",
-  "rating",
-  "episodes",
-  "status",
-  "mal_id",
-  "title",
-  "start_date",
-  "end_date",
-  "score",
-  "scored_by",
-  "rank",
-  "popularity",
-  "members",
-  "favorites",
-]);
+const animeSearchOrderSchema = z.enum(ANIME_ORDER_BY);
 
-const sortSchema = z.enum(["asc", "desc"]);
+const sortSchema = z.enum(ANIME_SORT_TYPE);
 
 const optionalTrimmedString = z.preprocess(
   (value) =>
@@ -98,8 +80,9 @@ export const animeSearchQuerySchema = z.object({
 export function sanitizeAnimeSearchQuery(
   query: unknown,
 ): Partial<AnimeSearchParams> {
-  const parsedQuery = animeSearchQuerySchema.safeParse(query);
-  return parsedQuery.success ? parsedQuery.data : {};
+  const { data, success } = animeSearchQuerySchema.safeParse(query);
+  if (success) return data as Partial<AnimeSearchParams>;
+  return {};
 }
 
 export function parseAnimeSearchQuery(

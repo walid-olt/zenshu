@@ -4,12 +4,24 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import RangeFilter from "./RangeFilter";
+import YearRangeFilter from "./YearRangeFilter";
+import StatusFilter from "./StatusFilter";
+import TypeFilter from "./TypeFilter";
+import GenresFilter from "./GenresFilter";
 export function Filters() {
   return (
     <Accordion type="multiple">
       <Filter label="Year">
-        <RangeFilter />
+        <YearRangeFilter />
+      </Filter>
+      <Filter label="Status">
+        <StatusFilter />
+      </Filter>
+      <Filter label="Type">
+        <TypeFilter />
+      </Filter>
+      <Filter label="Genres">
+        <GenresFilter />
       </Filter>
     </Accordion>
   );

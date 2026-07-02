@@ -1,4 +1,4 @@
-import { AnimeCardCompact } from "@/components/AnimeCard";
+import { AnimeCardAnimated } from "@/components/AnimeCard";
 import jikan from "@/lib/api-client/jikan";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -22,7 +22,7 @@ function AnimeSection({ heading, fetcher }: Props) {
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4 w-full overflow-x-clip">
         {/* slice because the API randomly ignores the limit  */}
         {data.slice(0, 6).map((anime, i) => (
-          <AnimeCardCompact key={anime.mal_id} anime={anime} index={i} />
+          <AnimeCardAnimated key={anime.mal_id} anime={anime} index={i} />
         ))}
       </div>
     </section>
