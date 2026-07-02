@@ -10,7 +10,7 @@ function AnimeSection({ heading, fetcher }: Props) {
   const {
     data: { data },
   } = useSuspenseQuery({
-    queryKey: ["anime", "airing"],
+    queryKey: [heading],
     queryFn: () => {
       return fetcher();
     },

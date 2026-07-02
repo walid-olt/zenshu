@@ -1,6 +1,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import useSafeParams from "../hooks/useSafeParams";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import jikan from "@/lib/api-client/jikan";
 import { AnimeCard } from "@/components/AnimeCard";
 import { AnimeCardSkeleton } from "@/components/LoadingSkeletons";
@@ -14,8 +14,11 @@ function Catalog() {
   //TODO: handle errors
   const { isFetching, isError, error, data } = useQuery({
     queryKey: [debouncedParams],
+    gcTime:1000*60,
+    staleTime:1000*60,
+    placeholderData:keepPreviousData,
     queryFn: () =>
-      jikan.anime.getAnimeSearch({ ...debouncedParams, limit: 24, sfw: true }),
+      jikan.anime.getAnimeSearch({ ...debouncedParams, limit: 24, sfw: false}),
   });
 
   // let the error boundary handle the fallback
