@@ -8,23 +8,22 @@ import EmptyResult from "@/components/EmptyResult";
 import { Button } from "@/components/ui/button";
 
 function Catalog() {
-  const [params, setParams, resetParams] = useSafeParams();
+  const [params, , resetParams] = useSafeParams();
 
   const debouncedParams = useDebounce(params, 1000);
-  //TODO: handle errors
-  const { isFetching, isError, error, data } = useQuery({
-    queryKey: [debouncedParams],
-    gcTime:1000*60,
-    staleTime:1000*60,
-    placeholderData:keepPreviousData,
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["catalog", debouncedParams],
+    gcTime: 1000 * 60,
+    staleTime: 1000 * 60,
+    placeholderData: keepPreviousData,
     queryFn: () =>
-      jikan.anime.getAnimeSearch({ ...debouncedParams, limit: 24, sfw: false}),
+      jikan.anime.getAnimeSearch({ ...debouncedParams, limit: 24, sfw: false }),
   });
 
   // let the error boundary handle the fallback
   if (error) throw new Error();
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <section>
         <div className="grid grid-cols-3 gap-2 w-full overflow-x-clip md:grid-cols-6">

@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
+import { useSearchParams } from "react-router";
 
 const tabs = [
   {
@@ -81,8 +82,15 @@ function LibraryTabPlaceholder({ title, description }: PlaceholderProps) {
 }
 
 export default function UserLibrary() {
+  const [params, setParams] = useSearchParams();
+  const tab = params.get("tab");
+  const active = tabs.find((t) => t.value === tab)?.value || "overview";
   return (
-    <Tabs defaultValue="overview">
+    <Tabs
+      defaultValue={active}
+      value={active}
+      onValueChange={(v) => setParams({ tab: v })}
+    >
       <TabsList
         variant="line"
         className="w-full justify-start overflow-x-auto whitespace-nowrap"
