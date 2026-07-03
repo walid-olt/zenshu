@@ -20,7 +20,7 @@ function Layout() {
           zIndex: 9999,
         }}
       />
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-clip">
         <Outlet />
       </div>
     </main>
