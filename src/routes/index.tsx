@@ -29,7 +29,7 @@ const routes: RouteObject[] = [
       {
         path: "/library",
         hydrateFallbackElement: <GlobalLoading />,
-        lazy: () => import("@/features/library/pages/LibraryPage"),
+        lazy: () => import("@/features/user-library/pages/LibraryPage"),
       },
     ],
   },
