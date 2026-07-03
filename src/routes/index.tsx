@@ -22,6 +22,11 @@ const routes: RouteObject[] = [
         lazy: () => import("@/features/catalog/pages/CatalogPage"),
       },
       {
+        path: "/anime/:id",
+        hydrateFallbackElement: <GlobalLoading />,
+        lazy: () => import("@/features/anime-details/pages/AnimeDetailsPage"),
+      },
+      {
         path: "/characters",
         hydrateFallbackElement: <GlobalLoading />,
         lazy: () => import("@/features/characters/pages/CharactersPage"),

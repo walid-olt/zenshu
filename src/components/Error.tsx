@@ -13,7 +13,7 @@ type Props = {
   description?: string;
   icon?: React.ReactNode;
   actionLabel?: string;
-} & Partial<FallbackProps>;
+} & FallbackProps;
 
 export default function Error({
   title = "Something went wrong!",

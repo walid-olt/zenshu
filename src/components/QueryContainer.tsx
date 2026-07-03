@@ -13,7 +13,6 @@ type QueryContainerProps = {
   /** Optional custom error fallback component */
   errorFallback?: ComponentType<FallbackProps>;
   /** Optional error message*/
-  errorMessage?: string;
 };
 
 /*
@@ -34,10 +33,7 @@ const QueryContainer = ({
             CustomErrorFallback ? (
               <CustomErrorFallback {...boundaryProps} />
             ) : (
-              <ErrorComponent
-                error={boundaryProps.error}
-                resetErrorBoundary={boundaryProps.resetErrorBoundary}
-              />
+              <ErrorComponent {...boundaryProps} />
             )
           }
         >
