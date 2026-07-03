@@ -17,7 +17,10 @@ export default function LibraryGrid({
     return (
       <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="overflow-hidden rounded-lg border border-border bg-card w-full">
+          <div
+            key={i}
+            className="overflow-hidden rounded-lg border border-border bg-card w-full"
+          >
             <div className="aspect-3/4 w-full animate-pulse bg-muted" />
             <div className="space-y-2 p-2.5">
               <div className="h-4 w-11/12 animate-pulse rounded-full bg-muted" />
@@ -30,12 +33,7 @@ export default function LibraryGrid({
   }
 
   if (items.length === 0) {
-    return (
-      <EmptyResult
-        title={emptyTitle}
-        description={emptyDescription}
-      />
-    );
+    return <EmptyResult title={emptyTitle} description={emptyDescription} />;
   }
 
   return (

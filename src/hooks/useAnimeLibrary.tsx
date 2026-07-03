@@ -1,4 +1,4 @@
-import localAnimeDB from "@/store/db";
+import localAnimeDB, { type AnimeEntry } from "@/store/db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 export function useAnimeEntry(id: number) {
@@ -9,7 +9,9 @@ export function useAllLibrary() {
   return useLiveQuery(() => localAnimeDB.library.toArray(), []);
 }
 
-export function useLibraryByStatus(status: "watching" | "to-watch" | "completed") {
+export function useLibraryByStatus(
+  status: "watching" | "to-watch" | "completed",
+) {
   return useLiveQuery(
     () => localAnimeDB.library.where("userStatus").equals(status).toArray(),
     [status],
@@ -30,10 +32,10 @@ export function useRated() {
   );
 }
 
-export function addAnime(animeEntry: import("@/store/db").AnimeEntry) {
+export function addAnime(animeEntry: AnimeEntry) {
   return localAnimeDB.library.add(animeEntry);
 }
 
-export function updateAnime(id: number, update: Partial<import("@/store/db").AnimeEntry>) {
+export function updateAnime(id: number, update: Partial<AnimeEntry>) {
   return localAnimeDB.library.update(id, update);
 }
