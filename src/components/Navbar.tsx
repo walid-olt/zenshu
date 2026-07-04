@@ -1,42 +1,22 @@
 import { NavLink } from "react-router";
 import { Button } from "./ui/button";
-import { BooksIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
+import { BooksIcon, } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
-import { useEffect, useState } from "react";
+import ThemeSwitcher from "./ThemeSwitcher";
+import Menu from "./NavMenu";
+import { Separator } from "@/components/ui/separator";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-
-    const storedTheme = window.localStorage.getItem("theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      return storedTheme;
-    }
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", theme === "dark");
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () =>
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
-
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between bg-background/85 px-8 py-2 shadow-[0_1px_0_0_var(--muted)] backdrop-blur-2xl">
+    <Menu>
+    <nav className="sticky top-0 z-50 flex items-center justify-between bg-background/85 px-2 lg:px-8 py-2 shadow-[0_1px_0_0_var(--muted)] backdrop-blur-2xl">
       <div>
         <NavLink className={"outline-none"} to={"/"}>
           <Logo />
         </NavLink>
       </div>
-      <div className="flex items-center gap-6 *:rounded-(--radius) *:px-2.5 *:py-1 *:hover:bg-popover">
+      <div className="items-center gap-6 *:rounded-(--radius) *:px-2.5 *:py-1 *:hover:bg-popover hidden lg:flex">
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -68,19 +48,53 @@ export default function Navbar() {
             My Library
           </NavLink>
         </Button>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+      </div>
+      
+      
+<div className="flex gap-x-2">
+
+        <ThemeSwitcher/>
+      <Menu.Trigger className="md:hidden"/>
+        </div>
+    </nav>
+      <Menu.Content>
+ <div className="flex items-center justify-between *:rounded-(--radius)  p-2 ">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            cn(
+              "text-md transition-colors",
+              isActive && "text-primary font-semibold",
+            )
+          }
         >
-          {theme === "dark" ? (
-            <SunIcon size={16} weight="regular" />
-          ) : (
-            <MoonIcon size={16} weight="regular" />
-          )}
+          Home
+        </NavLink>
+        <NavLink
+          to="/catalog"
+          className={({ isActive }) =>
+            cn(
+              "text-md transition-colors",
+              isActive && "text-primary font-semibold",
+            )
+          }
+        >
+          Catalog
+        </NavLink>
+        <Button disabled title="comming soon" variant={"link"}>
+          Characters
+        </Button>
+        <Button variant="outline" size="lg" asChild>
+          <NavLink to="/library">
+            <BooksIcon size={16} weight="regular" />
+            My Library
+          </NavLink>
         </Button>
       </div>
-    </nav>
+      
+        <Separator/>
+      </Menu.Content>
+
+      </Menu>
   );
 }

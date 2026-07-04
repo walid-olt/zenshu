@@ -19,7 +19,7 @@ function AnimeSection({ heading, fetcher }: Props) {
   return (
     <section className="px-8 py-12">
       <h2 className="text-2xl font-bold mb-6">{heading}</h2>
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-4 w-full overflow-x-clip">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 w-full overflow-x-clip">
         {/* slice because the API randomly ignores the limit  */}
         {data.slice(0, 6).map((anime, i) => (
           <AnimeCardAnimated key={anime.mal_id} anime={anime} index={i} />

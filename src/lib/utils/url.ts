@@ -12,10 +12,10 @@ export function formatTrailerUrl(trailer: Anime["trailer"]): string | null {
 
   // Rebuild params
   const params = new URLSearchParams({
-    enablejsapi: "1",
-    wmode: "opaque",
     autoplay: "1",
     mute: "1",
+disablekb:"1",
+    fs:"0",
     controls: "0",
     loop: "1",
     modestbranding: "1",

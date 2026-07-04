@@ -23,23 +23,23 @@ export default function Hero() {
 
   useEffect(() => {
     if (!iframeRef.current) return;
-    iframeRef.current.classList.add("opacity-100");
+    iframeRef.current.classList.add("opacity-0");
   });
 
   return (
-    <div className="w-screen overflow-hidden h-128 relative">
+    <div className="w-screen overflow-hidden h-[50vh] min-h-[320px] md:h-128 relative">
       <iframe
         ref={iframeRef}
         src={url}
         className="pointer-events-none aspect-video w-full opacity-0 transition-all duration-[1000] absolute -mt-16 ease-in"
       />
       <div className="absolute inset-0 bg-linear-to-t from-background via-background/70 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-8">
-        <h1 className="text-3xl font-bold mb-2">{anime.title}</h1>
-        <p className="text-muted-foreground text-sm line-clamp-2 max-w-prose mb-4">
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">{anime.title}</h1>
+        <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2 max-w-prose mb-4">
           {anime.synopsis}
         </p>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button variant="default" size="lg">
             View Details <ArrowSquareUpRightIcon size={16} weight="bold" />
           </Button>
