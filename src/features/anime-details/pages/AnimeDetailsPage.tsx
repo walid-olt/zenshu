@@ -11,7 +11,7 @@ export function Component() {
           <Error
             {...props}
             title="Failed to load anime details"
-            description="check your internet and try refreshing the page"
+            description="Check your internet and try refreshing the page"
           />
         )}
       >

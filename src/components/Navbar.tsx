@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 export default function Navbar() {
   return (
     <Menu>
-    <nav className="sticky top-0 z-50 flex items-center justify-between bg-background/85 px-2 lg:px-8 py-2 shadow-[0_1px_0_0_var(--muted)] backdrop-blur-2xl">
+    <nav className="sticky top-0 z-50 h-16 flex items-center justify-between bg-background/85 px-4 lg:px-8 py-2 shadow-[0_1px_0_0_var(--muted)] backdrop-blur-2xl">
       <div>
         <NavLink className={"outline-none"} to={"/"}>
           <Logo />
@@ -42,7 +42,7 @@ export default function Navbar() {
         <Button disabled title="comming soon" variant={"link"}>
           Characters
         </Button>
-        <Button variant="outline" size="sm" asChild>
+        <Button variant="outline" size="default" asChild>
           <NavLink to="/library">
             <BooksIcon size={16} weight="regular" />
             My Library
@@ -57,8 +57,8 @@ export default function Navbar() {
       <Menu.Trigger className="md:hidden"/>
         </div>
     </nav>
-      <Menu.Content>
- <div className="flex items-center justify-between *:rounded-(--radius)  p-2 ">
+      <Menu.Content className="sticky top-16 z-9999 bg-background/85 shadow-[0_-1px_0_0_var(--muted)] backdrop-blur-2xl">
+ <div className="flex items-center justify-between *:rounded-(--radius)  p-4 ">
         <NavLink
           to="/"
           className={({ isActive }) =>

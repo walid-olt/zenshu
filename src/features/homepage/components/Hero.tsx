@@ -2,7 +2,6 @@ import { BookmarkIcon, ArrowSquareUpRightIcon } from "@phosphor-icons/react";
 
 import { formatTrailerUrl } from "@/lib/utils/url";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef } from "react";
 import jikan from "@/lib/api-client/jikan";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -15,23 +14,17 @@ export default function Hero() {
     staleTime: 1000 * 60 * 60,
   });
   const anime = data[0];
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
-
   const url = formatTrailerUrl(anime.trailer);
   //TODO: display something when trailer isn't available
   if (!url) return null;
 
-  useEffect(() => {
-    if (!iframeRef.current) return;
-    iframeRef.current.classList.add("opacity-0");
-  });
-
   return (
     <div className="w-screen overflow-hidden h-[50vh] min-h-[320px] md:h-128 relative">
       <iframe
-        ref={iframeRef}
         src={url}
-        className="pointer-events-none aspect-video w-full opacity-0 transition-all duration-[1000] absolute -mt-16 ease-in"
+        title={`${anime.title} trailer`}
+        onLoad={(e) => e.currentTarget.classList.remove("opacity-0")}
+        className="pointer-events-none aspect-video w-full opacity-0 transition-all duration-1000 absolute -mt-16 ease-in"
       />
       <div className="absolute inset-0 bg-linear-to-t from-background via-background/70 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">

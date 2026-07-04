@@ -15,7 +15,7 @@ export function AnimeCard({ anime }: Omit<Props, "index">) {
 
   return (
     <div>
-      <Link to={`/anime/${mal_id}`} className="block group">
+      <Link to={`/catalog/${mal_id}`} className="block group">
         <div className="rounded-lg overflow-hidden bg-card border border-border">
           <div className="aspect-3/4 overflow-hidden">
             <img

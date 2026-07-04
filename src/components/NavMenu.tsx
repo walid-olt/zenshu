@@ -1,7 +1,7 @@
-import { motion, AnimatePresence, type  HTMLMotionProps } from "motion/react"; 
-import { createContext, useContext, useState, useId, type ComponentProps } from "react";
+import { motion, AnimatePresence, type  HTMLMotionProps, type Variants } from "motion/react"; 
+import { createContext, useContext, useState, type ComponentProps } from "react";
 import { Button, } from "./ui/button";
-import { HamburgerIcon, ListIcon, XIcon } from "@phosphor-icons/react";
+import { ListIcon, XIcon } from "@phosphor-icons/react";
 
 type MenuContextType = {
   isOpen: boolean;
@@ -52,9 +52,9 @@ function MenuTrigger({ children, ...props }: MenuTriggerProps) {
 type MenuContentProps = HTMLMotionProps<"div">;
 
 function MenuContent({ children, className, ...props }: MenuContentProps) {
-  const { isOpen, } = useMenuContext();
+  const { isOpen, setOpen } = useMenuContext();
 
-  const defaultVariants = {
+  const defaultVariants : Variants = {
     closed: { opacity: 0, height: 0, transition: { duration: 0.2, ease: "easeInOut" } },
     open: { opacity: 1, height: "auto", transition: { duration: 0.3, ease: "easeOut" } },
   };
@@ -68,6 +68,7 @@ function MenuContent({ children, className, ...props }: MenuContentProps) {
           exit="closed"
           variants={defaultVariants}
           className={`flex flex-col md:hidden overflow-hidden ${className || ""}`}
+          onClick={()=>setOpen(false)}
           {...props}
         >
           {children}
