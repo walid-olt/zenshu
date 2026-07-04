@@ -17,7 +17,7 @@ export default function SortType() {
       value={params.sort}
       onValueChange={(value) => setParams({ sort: value })}
     >
-      <SelectTrigger className="w-full max-w-48">
+      <SelectTrigger className="flex-2 md:w-full ">
         <SelectValue placeholder="Sorty Type" />
       </SelectTrigger>
       <SelectContent position="popper">

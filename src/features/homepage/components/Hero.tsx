@@ -4,6 +4,7 @@ import { formatTrailerUrl } from "@/lib/utils/url";
 import { Button } from "@/components/ui/button";
 import jikan from "@/lib/api-client/jikan";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 
 export default function Hero() {
   const {
@@ -33,8 +34,11 @@ export default function Hero() {
           {anime.synopsis}
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
-          <Button variant="default" size="lg">
+          <Button variant="default" size="lg" asChild>
+            <Link to={`/catalog/${anime.mal_id}`}>
+
             View Details <ArrowSquareUpRightIcon size={16} weight="bold" />
+            </Link>
           </Button>
           <Button variant="secondary" size="lg">
             <BookmarkIcon size={16} weight="regular" />

@@ -17,7 +17,7 @@ export default function OrderByFilter() {
       value={params.order_by}
       onValueChange={(value) => setParams({ order_by: value })}
     >
-      <SelectTrigger className="w-full max-w-28">
+      <SelectTrigger className="w-full flex-2 md:max-w-fit">
         <SelectValue placeholder="Order By" />
       </SelectTrigger>
       <SelectContent position="popper">

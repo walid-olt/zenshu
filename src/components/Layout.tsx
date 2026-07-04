@@ -1,4 +1,4 @@
-import { Outlet, useNavigation } from "react-router";
+import { Outlet, ScrollRestoration, useNavigation } from "react-router";
 import Navbar from "./Navbar";
 import { BarLoader } from "react-spinners";
 
@@ -21,6 +21,8 @@ function Layout() {
         }}
       />
       <div className="overflow-x-clip">
+         {/* resets scroll on navigation */}
+        <ScrollRestoration/>
         <Outlet />
       </div>
     </main>

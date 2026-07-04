@@ -55,7 +55,7 @@ export function AnimeCardAnimated({ anime, index }: Props) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.08, duration: 0.4, ease: "easeOut" }}
     >
-      <Link to={`/anime/${mal_id}`} className="block group">
+      <Link to={`/catalog/${mal_id}`} className="block group">
         <div className="rounded-lg overflow-hidden bg-card border border-border">
           <div className="aspect-3/4 overflow-hidden">
             <img
