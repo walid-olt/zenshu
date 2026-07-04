@@ -2,6 +2,7 @@ import { useAllLibrary, useFavorites, useLibraryByStatus, useRated } from "@/hoo
 import { BookOpenIcon, HeartStraightIcon, EyeIcon, BookmarkIcon, CheckFatIcon, StarIcon } from "@phosphor-icons/react";
 import LibraryGrid from "./LibraryGrid";
 import StatCard from "./StatCard";
+import { getAverageRating } from "@/lib/utils";
 
 export default function OverviewTab() {
   const all = useAllLibrary();
@@ -17,7 +18,7 @@ export default function OverviewTab() {
     { icon: <EyeIcon size={18} />, label: "Watching", count: watching?.length ?? 0 },
     { icon: <BookmarkIcon size={18} />, label: "Watchlist", count: watchlist?.length ?? 0 },
     { icon: <CheckFatIcon size={18} />, label: "Completed", count: completed?.length ?? 0 },
-    { icon: <StarIcon size={18} />, label: "Rated", count: rated?.length ?? 0 },
+    { icon: <StarIcon size={18} />, label: "Average rating", count: getAverageRating(rated??[]) },
   ];
 
   return (
