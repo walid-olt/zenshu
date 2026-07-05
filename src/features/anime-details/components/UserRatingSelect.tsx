@@ -9,20 +9,20 @@ import {
 } from "@/components/ui/select";
 import { StarIcon } from "@phosphor-icons/react";
 import { saveToLibrary } from "../actions/library";
-import { useLiveQuery } from "dexie-react-hooks";
-import localAnimeDB from "@/store/db";
 import type { Anime } from "@tutkli/jikan-ts";
+import { useAnimeEntry } from "@/hooks/useAnimeLibrary";
 
 type UserRatingSelectProps = {
   anime: Anime;
 };
 
 export default function UserRatingSelect({ anime }: UserRatingSelectProps) {
-  const entry = useLiveQuery(() => localAnimeDB.library.get(anime.mal_id), [anime.mal_id]);
+  const entry = useAnimeEntry(anime.mal_id);
+  if (!entry) return null;
 
   return (
     <Select
-      value={entry?.userRating?.toString() ?? undefined}
+      value={entry.userRating?.toString() ?? undefined}
       onValueChange={(value) =>
         saveToLibrary(anime, entry?.userStatus ?? null, parseInt(value))
       }

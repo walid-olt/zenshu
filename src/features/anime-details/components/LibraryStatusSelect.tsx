@@ -14,8 +14,7 @@ import {
 } from "@phosphor-icons/react";
 import { saveToLibrary } from "../actions/library";
 import type { Anime } from "@tutkli/jikan-ts";
-import { useLiveQuery } from "dexie-react-hooks";
-import localAnimeDB from "@/store/db";
+import { useAnimeEntry } from "@/hooks/useAnimeLibrary";
 
 type LibraryStatusSelectProps = {
   anime: Anime;
@@ -28,11 +27,11 @@ const statuses = [
 ] as const;
 
 export default function LibraryStatusSelect({ anime }: LibraryStatusSelectProps) {
-  const entry = useLiveQuery(() => localAnimeDB.library.get(anime.mal_id), [anime.mal_id]);
+  const entry = useAnimeEntry(anime.mal_id);
 
   return (
     <Select
-      value={entry?.userStatus ?? undefined}
+      value={entry?.userStatus ?? ""}
       onValueChange={(value) =>
         saveToLibrary(anime, value as "to-watch" | "watching" | "completed")
       }
