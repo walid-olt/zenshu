@@ -1,4 +1,4 @@
-import { BookmarkIcon, ArrowSquareUpRightIcon } from "@phosphor-icons/react";
+import { ArrowSquareUpRightIcon, InfoIcon } from "@phosphor-icons/react";
 
 import { formatTrailerUrl } from "@/lib/utils/url";
 import { Button } from "@/components/ui/button";
@@ -37,13 +37,15 @@ export default function Hero() {
           <Button variant="default" size="lg" asChild>
             <Link to={`/catalog/${anime.mal_id}`}>
 
-            View Details <ArrowSquareUpRightIcon size={16} weight="bold" />
+            View Details <InfoIcon size={16} weight="bold" />
             </Link>
           </Button>
-          <Button variant="secondary" size="lg">
-            <BookmarkIcon size={16} weight="regular" />
-            To Watch
-          </Button>
+          <Button variant="secondary" size="lg" asChild>
+              <Link to={`/catalog}`}>
+
+            See Catalog<ArrowSquareUpRightIcon size={16} weight="bold" />
+            </Link>          
+        </Button>
         </div>
       </div>
     </div>
