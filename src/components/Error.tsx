@@ -7,12 +7,14 @@ import {
 import { Button } from "@/components/ui/button";
 import type { FallbackProps } from "react-error-boundary";
 import { WarningCircleIcon as Icon } from "@phosphor-icons/react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   title?: string;
   description?: string;
   icon?: React.ReactNode;
   actionLabel?: string;
+  className?: string;
 } & FallbackProps;
 
 export default function Error({
@@ -20,6 +22,7 @@ export default function Error({
   description,
   icon,
   actionLabel = "Try Again",
+  className,
   error,
   resetErrorBoundary,
 }: Props) {
@@ -27,7 +30,7 @@ export default function Error({
     description || "An unexpected error occurred. Please try again.";
   console.error(error);
   return (
-    <Alert variant="destructive" role="alert" className="my-8 mx-auto h-max">
+    <Alert variant="destructive" role="alert" className={cn("my-8 mx-auto h-max", className)}>
       <AlertTitle className="flex items-center gap-2">
         {icon || <Icon className="size-5" />}
         <span>{title}</span>

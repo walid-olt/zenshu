@@ -1,6 +1,7 @@
 import jikan from "@/lib/api-client/jikan";
 import AnimeSection from "./AnimeSection";
 import QueryContainer from "@/components/QueryContainer";
+import Error from "@/components/Error";
 import { AnimeCardSkeleton } from "@/components/LoadingSkeletons";
 
 function Trending() {
@@ -16,6 +17,15 @@ function Trending() {
           </div>
         </section>
       }
+      errorFallback={(props) => (
+        <section className="px-8 py-12">
+          <Error
+            {...props}
+            title="Failed to load trending anime"
+            description="Couldn't fetch trending anime, try again"
+          />
+        </section>
+      )}
     >
       <AnimeSection
         heading="Trending now"

@@ -2,6 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { ANIME_STATUS } from "@/lib/constants/";
 import useSafeParams from "../hooks/useSafeParams";
+import type { AnimeSearchStatus } from "@tutkli/jikan-ts";
 
 function StatusFilter() {
   const [params, setParams] = useSafeParams();
@@ -17,7 +18,7 @@ function StatusFilter() {
               name={status}
               checked={isChecked}
               onCheckedChange={(checked) =>
-                setParams({ status: checked === true ? status : undefined })
+                setParams({ status: checked === true ? (status as AnimeSearchStatus) : undefined })
               }
             />
             <Label htmlFor={status}>{status}</Label>

@@ -19,9 +19,10 @@ export default function FeaturedCollection() {
         }
         errorFallback={(props) => (
           <Error
-            description=""
+            className="col-span-full"
             {...props}
             title="Failed to load collection data"
+            description="Couldn't fetch collection data, try again"
           />
         )}
       >

@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useSafeParams from "../hooks/useSafeParams";
+import type { AnimeSearchOrder } from "@tutkli/jikan-ts";
 
 export default function OrderByFilter() {
   const [params, setParams] = useSafeParams();
@@ -15,7 +16,8 @@ export default function OrderByFilter() {
   return (
     <Select
       value={params.order_by}
-      onValueChange={(value) => setParams({ order_by: value })}
+      // type casting is okay here since everything passes thru the validation schema anyway
+      onValueChange={(value) => setParams({ order_by: (value as AnimeSearchOrder)  })}
     >
       <SelectTrigger className="w-full flex-2 md:max-w-fit">
         <SelectValue placeholder="Order By" />
