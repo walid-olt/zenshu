@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import useSafeParams from "../hooks/useSafeParams";
@@ -7,10 +6,7 @@ import { ANIME_GENRES } from "@/lib/constants/";
 function GenresFilter() {
   const [params, setParams] = useSafeParams();
 
-  const selectedGenres = useMemo(
-    () => new Set((params.genres ?? "").split(",").filter(Boolean)),
-    [params.genres],
-  );
+  const selectedGenres = new Set((params.genres ?? "").split(",").filter(Boolean));
 
   const toggleGenre = (genreId: number, checked: boolean) => {
     const id = String(genreId);
